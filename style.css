@@ -124,10 +124,29 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
-.handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
-.handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
-.handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
+.handle.nw {
+    top: -6px;
+    left: -6px;
+    cursor: nw-resize;
+}
+
+.handle.ne {
+    top: -6px;
+    right: -6px;
+    cursor: ne-resize;
+}
+
+.handle.sw {
+    bottom: -6px;
+    left: -6px;
+    cursor: sw-resize;
+}
+
+.handle.se {
+    bottom: -6px;
+    right: -6px;
+    cursor: se-resize;
+}
 
 /* Controls */
 .controls {
@@ -216,13 +235,39 @@ input[type="file"] {
     background-color: var(--accent-hover);
 }
 
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondary-btn:hover {
+    background-color: var(--card-bg);
+    border-color: var(--text-secondary);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.action-buttons button {
+    flex: 1;
+}
+
 /* Mobile Responsiveness */
 @media (min-width: 768px) {
     .controls {
         flex-direction: row;
         align-items: flex-end;
     }
-    
+
     .control-group {
         flex: 1;
     }

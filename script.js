@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceImage = document.getElementById('source-image');
     const cropOverlay = document.getElementById('crop-overlay');
     const downloadBtn = document.getElementById('download-btn');
+    const shareBtn = document.getElementById('share-btn');
 
     // Inputs
     const inputs = {
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchend', handleDragEnd);
 
         downloadBtn.addEventListener('click', handleDownload);
+        shareBtn.addEventListener('click', handleShareUrl);
 
         // Window resize
         window.addEventListener('resize', () => {
@@ -217,6 +219,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleDragEnd() {
         state.isDragging = false;
         state.dragHandle = null;
+    }
+
+    function handleShareUrl() {
+        const url = new URL(window.location.href);
+        url.searchParams.set('x1', state.crop.x1);
+        url.searchParams.set('y1', state.crop.y1);
+        url.searchParams.set('x2', state.crop.x2);
+        url.searchParams.set('y2', state.crop.y2);
+
+        navigator.clipboard.writeText(url.toString()).then(() => {
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                shareBtn.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            alert('Failed to copy URL');
+        });
     }
 
     function handleDownload() {

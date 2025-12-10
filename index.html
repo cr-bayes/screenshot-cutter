@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
         <header>
@@ -20,7 +22,7 @@
             <div class="upload-section">
                 <label for="file-upload" class="custom-file-upload">
                     <span>Select Image</span>
-                    <input id="file-upload" type="file" accept="image/*"/>
+                    <input id="file-upload" type="file" accept="image/*" />
                 </label>
             </div>
 
@@ -73,7 +75,10 @@
                     </div>
                 </div>
 
-                <button id="download-btn" class="primary-btn">Download Crop</button>
+                <div class="action-buttons">
+                    <button id="share-btn" class="secondary-btn">Copy URL</button>
+                    <button id="download-btn" class="primary-btn">Download Crop</button>
+                </div>
             </div>
         </main>
     </div>
@@ -81,4 +86,5 @@
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
