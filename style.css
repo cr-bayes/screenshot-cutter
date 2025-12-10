@@ -69,6 +69,7 @@ header p {
     border-radius: 8px;
     transition: all 0.2s ease;
     font-weight: 500;
+    touch-action: manipulation;
 }
 
 .custom-file-upload:hover {
@@ -90,6 +91,7 @@ input[type="file"] {
     overflow: hidden;
     position: relative;
     border: 1px solid var(--border-color);
+    touch-action: none;
 }
 
 .image-container {
@@ -112,6 +114,7 @@ input[type="file"] {
     background-color: var(--overlay-bg);
     cursor: move;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    touch-action: none;
 }
 
 .handle {
@@ -213,6 +216,7 @@ input[type="file"] {
     padding: 8px 12px;
     font-size: 1.1rem;
     transition: color 0.2s;
+    touch-action: manipulation;
 }
 
 .adjust-btn:hover {
@@ -229,6 +233,7 @@ input[type="file"] {
     cursor: pointer;
     transition: background-color 0.2s;
     width: 100%;
+    touch-action: manipulation;
 }
 
 .url-input-wrapper {
@@ -265,6 +270,7 @@ input[type="file"] {
     font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.2s;
+    touch-action: manipulation;
 }
 
 .copy-icon-btn:hover {
@@ -286,6 +292,7 @@ input[type="file"] {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    touch-action: manipulation;
 }
 
 .secondary-btn:hover {
