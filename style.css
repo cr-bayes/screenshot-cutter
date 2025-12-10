@@ -306,16 +306,21 @@ input[type="file"] {
 /* Mobile Responsiveness */
 @media (min-width: 768px) {
     .controls {
-        flex-direction: row;
-        align-items: flex-end;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: end;
+        gap: 20px;
     }
 
     .control-group {
-        flex: 1;
+        width: 100%;
+    }
+
+    .action-buttons {
+        width: 100%;
     }
 
     .primary-btn {
-        width: auto;
-        min-width: 160px;
+        width: 100%;
     }
 }
