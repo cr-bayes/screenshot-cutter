@@ -84,10 +84,19 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button id="download-btn" class="primary-btn">Download Crop</button>
+                    <button id="execute-btn" class="primary-btn">Execute Crop</button>
+                    <button id="download-btn" class="secondary-btn" style="display: none;">Download</button>
                 </div>
             </div>
-        </main>
+
+            <div class="result-section" id="result-section" style="display: none;">
+                <h2>Preview</h2>
+                <div class="result-container">
+                    <img id="result-image" src="" alt="Cropped Result">
+                </div>
+            </div>
+    </div>
+    </main>
     </div>
 
     <script src="config.js"></script>

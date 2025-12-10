@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceImage = document.getElementById('source-image');
     const cropOverlay = document.getElementById('crop-overlay');
     const downloadBtn = document.getElementById('download-btn');
+    const executeBtn = document.getElementById('execute-btn');
+    const resultSection = document.getElementById('result-section');
+    const resultImage = document.getElementById('result-image');
     const shareUrlInput = document.getElementById('share-url-input');
     const copyInputBtn = document.getElementById('copy-input-btn');
 
@@ -73,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchend', handleDragEnd);
 
         downloadBtn.addEventListener('click', handleDownload);
+        executeBtn.addEventListener('click', handleExecute);
         copyInputBtn.addEventListener('click', handleCopyUrl);
 
         // Select all text when clicking the input
@@ -254,13 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function handleDownload() {
+    function handleExecute() {
         if (!state.imageLoaded) return;
 
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         const width = state.crop.x2 - state.crop.x1;
         const height = state.crop.y2 - state.crop.y1;
+
+        if (width <= 0 || height <= 0) return;
 
         canvas.width = width;
         canvas.height = height;
@@ -271,9 +277,21 @@ document.addEventListener('DOMContentLoaded', () => {
             0, 0, width, height
         );
 
+        const dataUrl = canvas.toDataURL('image/png');
+        resultImage.src = dataUrl;
+        resultSection.style.display = 'flex';
+        downloadBtn.style.display = 'inline-block';
+
+        // Scroll to result
+        resultSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleDownload() {
+        if (!resultImage.src || resultImage.src === "") return;
+
         const link = document.createElement('a');
         link.download = `cropped-${Date.now()}.png`;
-        link.href = canvas.toDataURL('image/png');
+        link.href = resultImage.src;
         link.click();
     }
 });
