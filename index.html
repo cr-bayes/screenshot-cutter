@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Cutter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Screenshot Cutter</h1>
+            <p>Upload, Crop, Download</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <label for="file-upload" class="custom-file-upload">
+                    <span>Select Image</span>
+                    <input id="file-upload" type="file" accept="image/*"/>
+                </label>
+            </div>
+
+            <div class="workspace" id="workspace" style="display: none;">
+                <div class="image-container" id="image-container">
+                    <img id="source-image" src="" alt="Source">
+                    <div id="crop-overlay" class="crop-overlay">
+                        <div class="handle nw" data-handle="nw"></div>
+                        <div class="handle ne" data-handle="ne"></div>
+                        <div class="handle sw" data-handle="sw"></div>
+                        <div class="handle se" data-handle="se"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls" id="controls" style="display: none;">
+                <div class="control-group">
+                    <label>Top-Left (X1, Y1)</label>
+                    <div class="coord-inputs">
+                        <div class="input-wrapper">
+                            <span>X1</span>
+                            <button class="adjust-btn" onclick="adjustValue('x1', -1)">-</button>
+                            <input type="number" id="x1" value="0">
+                            <button class="adjust-btn" onclick="adjustValue('x1', 1)">+</button>
+                        </div>
+                        <div class="input-wrapper">
+                            <span>Y1</span>
+                            <button class="adjust-btn" onclick="adjustValue('y1', -1)">-</button>
+                            <input type="number" id="y1" value="0">
+                            <button class="adjust-btn" onclick="adjustValue('y1', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Bottom-Right (X2, Y2)</label>
+                    <div class="coord-inputs">
+                        <div class="input-wrapper">
+                            <span>X2</span>
+                            <button class="adjust-btn" onclick="adjustValue('x2', -1)">-</button>
+                            <input type="number" id="x2" value="0">
+                            <button class="adjust-btn" onclick="adjustValue('x2', 1)">+</button>
+                        </div>
+                        <div class="input-wrapper">
+                            <span>Y2</span>
+                            <button class="adjust-btn" onclick="adjustValue('y2', -1)">-</button>
+                            <input type="number" id="y2" value="0">
+                            <button class="adjust-btn" onclick="adjustValue('y2', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="download-btn" class="primary-btn">Download Crop</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
