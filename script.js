@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceImage = document.getElementById('source-image');
     const cropOverlay = document.getElementById('crop-overlay');
     const downloadBtn = document.getElementById('download-btn');
-    const shareBtn = document.getElementById('share-btn');
+    const shareUrlInput = document.getElementById('share-url-input');
+    const copyInputBtn = document.getElementById('copy-input-btn');
 
     // Inputs
     const inputs = {
@@ -72,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchend', handleDragEnd);
 
         downloadBtn.addEventListener('click', handleDownload);
-        shareBtn.addEventListener('click', handleShareUrl);
+        copyInputBtn.addEventListener('click', handleCopyUrl);
+
+        // Select all text when clicking the input
+        shareUrlInput.addEventListener('click', () => shareUrlInput.select());
 
         // Window resize
         window.addEventListener('resize', () => {
@@ -146,6 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
         inputs.y1.value = state.crop.y1;
         inputs.x2.value = state.crop.x2;
         inputs.y2.value = state.crop.y2;
+        updateShareUrl();
+    }
+
+    function updateShareUrl() {
+        if (!state.imageLoaded) return;
+        const url = new URL(window.location.href);
+        url.searchParams.set('x1', state.crop.x1);
+        url.searchParams.set('y1', state.crop.y1);
+        url.searchParams.set('x2', state.crop.x2);
+        url.searchParams.set('y2', state.crop.y2);
+        shareUrlInput.value = url.toString();
     }
 
     // Global function for +/- buttons
@@ -221,22 +236,21 @@ document.addEventListener('DOMContentLoaded', () => {
         state.dragHandle = null;
     }
 
-    function handleShareUrl() {
-        const url = new URL(window.location.href);
-        url.searchParams.set('x1', state.crop.x1);
-        url.searchParams.set('y1', state.crop.y1);
-        url.searchParams.set('x2', state.crop.x2);
-        url.searchParams.set('y2', state.crop.y2);
+    function handleCopyUrl() {
+        if (!shareUrlInput.value) return;
 
-        navigator.clipboard.writeText(url.toString()).then(() => {
-            const originalText = shareBtn.textContent;
-            shareBtn.textContent = 'Copied!';
+        shareUrlInput.select();
+        shareUrlInput.setSelectionRange(0, 99999); // Mobile compatibility
+
+        navigator.clipboard.writeText(shareUrlInput.value).then(() => {
+            const originalText = copyInputBtn.textContent;
+            copyInputBtn.textContent = 'Copied!';
             setTimeout(() => {
-                shareBtn.textContent = originalText;
+                copyInputBtn.textContent = 'Copy';
             }, 2000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
-            alert('Failed to copy URL');
+            // Fallback is just leaving the text selected so user can copy manually
         });
     }
 
